@@ -543,7 +543,7 @@ json5 = \
                 "fclName": "city, village,...",
                 "name": "Hong Kong",
                 "wikipedia": "en.wikipedia.org/wiki/Hong_Kong",
-                "lng": 114.157691001892,
+                "lngXXX": 114.157691001892,
                 "fcode": "PPLC",
                 "geonameId": 1819729,
                 "lat": 22.2855225817732,
