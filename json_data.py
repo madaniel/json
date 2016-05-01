@@ -566,4 +566,16 @@ json5 = \
         ]
     }
 
-
+json6 = \
+    {
+      "1": {
+        "time": "01:51:50 PM",
+        "milliseconds_since_epoch": 1461851510009,
+        "date": "04-28-2016"
+      },
+      "2": {
+        "time": "02:52:50 PM",
+        "milliseconds_since_epoch": 2462852520009,
+        "date": "04-28-2026"
+      }
+    }
