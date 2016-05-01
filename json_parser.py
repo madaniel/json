@@ -4,15 +4,34 @@ import json
 import json_data
 
 
-json = json_data.json5
+json = json_data.json3
 
 
 def main():
-    print get_value(json, "fcodeNameXXX")
+    print count_keys(json, "short_name")
 
 
-# Functions
+# # # Functions # # #
+def count_keys(json_dict, target_key, count=0):
+
+    for key, value in json_dict.iteritems():
+        if isinstance(value, dict):
+            count += count_keys(value, target_key)
+
+        if isinstance(value, list):
+                # Check if list contains dict
+                for item in value:
+                    # If so, send it to get_value for searching
+                    if isinstance(item, dict):
+                        count += count_keys(item, target_key)
+
+    if target_key in json_dict:
+        count += 1
+    return count
+
+
 def get_value(json_dict, target_key):
+    """ This function can work only with single instance of the target_key on json """
     # The key found on the current dict
     if target_key in json_dict:
         return json_dict[target_key]
@@ -20,13 +39,13 @@ def get_value(json_dict, target_key):
     # The key not found
     for key, value in json_dict.iteritems():
 
-        # There's still more dict on the structure
+        # Current key is a dict
         if isinstance(value, dict):
             result = get_value(value, target_key)
             if result is not None:
                 return result
 
-        # There's a list on the tree
+        # Current key is a list
         if isinstance(value, list):
             # Check if the list contains dict
             for item in value:
@@ -35,17 +54,6 @@ def get_value(json_dict, target_key):
                     result = get_value(item, target_key)
                     if result is not None:
                         return result
-
-
-
-
-
-
-
-
-
-
-
 
 
 def get_json(url):
