@@ -566,6 +566,7 @@ json5 = \
         ]
     }
 
+
 json6 = \
     {
       "1": {
@@ -578,4 +579,52 @@ json6 = \
         "milliseconds_since_epoch": 2462852520009,
         "date": "04-28-2026"
       }
+    }
+
+
+json7 = \
+    {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Product set",
+    "type": "array",
+    "items": {
+        "title": "Product",
+        "type": "object",
+        "properties": {
+            "id": {
+                "description": "The unique identifier for a product",
+                "type": "number"
+            },
+            "name": {
+                "type": "string"
+            },
+            "price": {
+                "type": "number",
+                "minimum": 0,
+                "exclusiveMinimum": True
+            },
+            "tags": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                },
+                "minItems": 1,
+                "uniqueItems": True
+            },
+            "dimensions": {
+                "type": "object",
+                "properties": {
+                    "length": {"type": "number"},
+                    "width": {"type": "number"},
+                    "height": {"type": "number"}
+                },
+                "required": ["length", "width", "height"]
+            },
+            "warehouseLocation": {
+                "description": "Coordinates of the warehouse with the product",
+                "$ref": "http://json-schema.org/geo"
+            }
+        },
+        "required": ["id", "name", "price"]
+    }
     }
