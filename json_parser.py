@@ -4,14 +4,37 @@ import json
 import json_data
 
 
-json = json_data.json3
+json_src = json_data.json7
 
 
 def main():
-    print count_keys(json, "short_name")
+    print_json(get_values_list(json_src, "type"))
 
 
 # # # Functions # # #
+def get_values_list(json_dict, target_key, values_list=None):
+    if values_list is None:
+        values_list = []
+
+    for key, value in json_dict.iteritems():
+        if isinstance(value, dict):
+            get_values_list(value, target_key, values_list)
+
+        if isinstance(value, list):
+            # Check if list contains dict
+            for item in value:
+                # If so, send it to get_value for searching
+                if isinstance(item, dict):
+                    get_values_list(item, target_key, values_list)
+
+    if target_key in json_dict:
+        #values_list.append(json_dict[target_key])
+        values_list.append(json_dict)
+
+    if values_list:
+        return values_list
+
+
 def count_keys(json_dict, target_key, count=0):
 
     for key, value in json_dict.iteritems():
@@ -66,9 +89,10 @@ def get_json(url):
 
 def print_json(dict_data):
     # Transfer dictionary into json format
-    json_data = json.dumps(dict_data)
-
-    print json_data
+    if isinstance(dict_data, dict) or isinstance(dict_data, list):
+        print json.dumps(dict_data)
+    else:
+        print "Error - no data given"
 
 
 main()
