@@ -628,3 +628,117 @@ json7 = \
         "required": ["id", "name", "price"]
     }
     }
+
+
+json8 = \
+    {
+        "colorsArray": [{
+                "colorName": "red",
+                "hexValue": "#f00"
+            },
+            {
+                "colorName": "green",
+                "hexValue": "#0f0"
+            },
+            {
+                "colorName": "blue",
+                "hexValue": "#00f"
+            },
+            {
+                "colorName": "cyan",
+                "hexValue": "#0ff"
+            },
+            {
+                "colorName": "magenta",
+                "hexValue": "#f0f"
+            },
+            {
+                "colorName": "yellow",
+                "hexValue": "#ff0"
+            },
+            {
+                "colorName": "black",
+                "hexValue": "#000"
+            }
+        ]
+    }
+
+
+json9 = \
+    {
+          "menu": {
+            "header": "xProgress SVG Viewer",
+            "items": [
+              {
+                "id": "Open"
+              },
+              {
+                "id": "OpenNew",
+                "label": "Open New"
+              },
+              None,
+              {
+                "id": "ZoomIn",
+                "label": "Zoom In"
+              },
+              {
+                "id": "ZoomOut",
+                "label": "Zoom Out"
+              },
+              {
+                "id": "OriginalView",
+                "label": "Original View"
+              },
+              None,
+              {
+                "id": "Quality"
+              },
+              {
+                "id": "Pause"
+              },
+              {
+                "id": "Mute"
+              },
+              None,
+              {
+                "id": "Find",
+                "label": "Find..."
+              },
+              {
+                "id": "FindAgain",
+                "label": "Find Again"
+              },
+              {
+                "id": "Copy"
+              },
+              {
+                "id": "CopyAgain",
+                "label": "Copy Again"
+              },
+              {
+                "id": "CopySVG",
+                "label": "Copy SVG"
+              },
+              {
+                "id": "ViewSVG",
+                "label": "View SVG"
+              },
+              {
+                "id": "ViewSource",
+                "label": "View Source"
+              },
+              {
+                "id": "SaveAs",
+                "label": "Save As"
+              },
+              None,
+              {
+                "id": "Help"
+              },
+              {
+                "id": "About",
+                "label": "About xProgress CVG Viewer..."
+              }
+            ]
+          }
+        }
