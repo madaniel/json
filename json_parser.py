@@ -33,13 +33,28 @@ def get_values_list(json_dict, target_key, values_list=None):
         return values_list
 
 
-def count_keys(json_dict, target_key, count=0):
+def count_keys(json_dict, target_key):
+    # Helper function to count_keys_dict()
+
+    if isinstance(json_dict, dict):
+        return count_keys_dict(json_dict, target_key)
+
+    count = 0
+    if isinstance(json_dict, list):
+        for item in json_dict:
+            count += count_keys_dict(item, target_key)
+
+    return count
+
+
+def count_keys_dict(json_dict, target_key, count=0):
     """
-    :param json_dict: JSON object
-    :param target_key: key to find
-    :param count: number of target key instances
-    :return: number of instances found
+        :param json_dict: JSON object [dict only]
+        :param target_key: key to find
+        :param count: number of target key instances
+        :return: number of instances found
     """
+    assert isinstance(json_dict, dict), "can't handle lists as JSON root"
 
     for key, value in json_dict.iteritems():
         # Handling dictionary
