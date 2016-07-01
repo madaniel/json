@@ -35,8 +35,15 @@ json9_value_0 = [{"id": "OpenNew", "label": "Open New"}, {"id": "ZoomIn", "label
                  {"id": "SaveAs", "label": "Save As"}, {"id": "About", "label": "About xProgress CVG Viewer..."}]
 json9_values = [json9_value_0]
 
+json10_keys = ["time", "milliseconds_since_epoch", "date"]
+json10_count = [1, 1, 1]
+
+json11_keys = ["geonameId", "countrycode", "milliseconds_since_epoch", "fcodeName"]
+json11_count = [1, 1, 1, 2]
 
 # # # # # Test Cases # # # # #
+
+
 @pytest.mark.get_value
 def test_get_value_tc1():
         # Testing get_value with a simple JSON
@@ -82,6 +89,25 @@ def test_count_keys_tc2():
     assert json_parser.count_keys(json, json3_keys[0]) == json3_count[0]
     assert json_parser.count_keys(json, json3_keys[1]) == json3_count[1]
     assert json_parser.count_keys(json, json3_keys[2]) == json3_count[2]
+
+
+@pytest.mark.count_keys
+def test_count_keys_tc3():
+    # Testing count_keys with list of JSONs
+    json = json_data.json10
+    assert json_parser.count_keys(json, json10_keys[0]) == json10_count[0]
+    assert json_parser.count_keys(json, json10_keys[1]) == json10_count[1]
+    assert json_parser.count_keys(json, json10_keys[2]) == json10_count[2]
+
+
+@pytest.mark.count_keys
+def test_count_keys_tc4():
+    # Testing count_keys with list of JSONs
+    json = json_data.json11
+    assert json_parser.count_keys(json, json11_keys[0]) == json11_count[0]
+    assert json_parser.count_keys(json, json11_keys[1]) == json11_count[1]
+    assert json_parser.count_keys(json, json11_keys[2]) == json11_count[2]
+    assert json_parser.count_keys(json, json11_keys[3]) == json11_count[3]
 
 
 @pytest.mark.get_values_list
