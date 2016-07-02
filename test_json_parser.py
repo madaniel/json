@@ -43,7 +43,18 @@ json11_keys = ["geonameId", "countrycode", "milliseconds_since_epoch", "fcodeNam
 json11_count = [1, 1, 1, 2]
 json11_values = [3530597, "MX", 1461851510009, "capital of a political entity"]
 
+json12_keys = json8_keys
+json12_values = json8_values
+
+json13_keys = ["time", "date"]
+json13_values = [{'date': '04-28-2016', 'milliseconds_since_epoch': 1461851510009L, 'time': '01:51:50 PM'},
+                 {'date': '04-28-2026', 'milliseconds_since_epoch': 2462852520009L, 'time': '02:52:50 PM'},
+                 {'date': '04-28-2036', 'milliseconds_since_epoch': 1461851510009L, 'time': '01:53:50 PM'},
+                 {'date': '04-28-2046', 'milliseconds_since_epoch': 2462852520009L, 'time': '02:54:50 PM'}]
+
+
 # # # # # Test Cases # # # # #
+
 
 @pytest.mark.get_value
 def test_get_value_tc0():
@@ -138,18 +149,32 @@ def test_count_keys_tc4():
     assert json_parser.count_keys(json, json11_keys[3]) == json11_count[3]
 
 
-@pytest.mark.get_values_list
-def test_get_values_list_tc1():
-    # Testing get_values_list on multi values JSON #1
+@pytest.mark.get_all_values
+def test_get_all_values_tc1():
+    # Testing get_all_values on multi values JSON #1
     json = json_data.json8
-    assert json_parser.get_values_list(json, json8_keys[0]) == json8_values[0]
-    assert json_parser.get_values_list(json, json8_keys[1]) == json8_values[0]
+    assert json_parser.get_all_values(json, json8_keys[0]) == json8_values[0]
+    assert json_parser.get_all_values(json, json8_keys[1]) == json8_values[0]
 
 
-@pytest.mark.get_values_list
-def test_get_values_list_tc2():
-    # Testing get_values_list on multi values JSON #2
+@pytest.mark.get_all_values
+def test_get_all_values_tc2():
+    # Testing get_all_values on multi values JSON #2
     json = json_data.json9
-    assert json_parser.get_values_list(json, json9_keys[0]) == json9_values[0]
+    assert json_parser.get_all_values(json, json9_keys[0]) == json9_values[0]
 
 
+@pytest.mark.get_all_values
+def test_get_all_values_tc3():
+    # Testing get_all_values on list of multi values JSON #1
+    json = json_data.json12
+    assert json_parser.get_all_values(json, json12_keys[0]) == json12_values[0]
+    assert json_parser.get_all_values(json, json12_keys[1]) == json12_values[0]
+
+
+@pytest.mark.get_all_values
+def test_get_all_values_tc4():
+    # Testing get_all_values on list of multi values JSON #2
+    json = json_data.json13
+    assert json_parser.get_all_values(json, json13_keys[0]) == json13_values
+    assert json_parser.get_all_values(json, json13_keys[1]) == json13_values
