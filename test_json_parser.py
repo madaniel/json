@@ -37,11 +37,20 @@ json9_values = [json9_value_0]
 
 json10_keys = ["time", "milliseconds_since_epoch", "date"]
 json10_count = [1, 1, 1]
+json10_values = ["01:51:50 PM", 1461851510009, "04-28-2016"]
 
 json11_keys = ["geonameId", "countrycode", "milliseconds_since_epoch", "fcodeName"]
 json11_count = [1, 1, 1, 2]
+json11_values = [3530597, "MX", 1461851510009, "capital of a political entity"]
 
 # # # # # Test Cases # # # # #
+
+@pytest.mark.get_value
+def test_get_value_tc0():
+    # Testing get_value when nothing found
+    json = json_data.json1
+    assert not json_parser.get_value([], "")
+    assert not json_parser.get_value(json, "Nothing")
 
 
 @pytest.mark.get_value
@@ -71,6 +80,25 @@ def test_get_value_tc3():
     assert json_parser.get_value(json, json5_keys[1]) == json5_values[1]
     assert json_parser.get_value(json, json5_keys[2]) == json5_values[2]
     assert json_parser.get_value(json, json5_keys[3]) == json5_values[3]
+
+
+@pytest.mark.get_value
+def test_get_value_tc4():
+    # Testing get_value with list of JSON
+    json = json_data.json10
+    assert json_parser.get_value(json, json10_keys[0]) == json10_values[0]
+    assert json_parser.get_value(json, json10_keys[1]) == json10_values[1]
+    assert json_parser.get_value(json, json10_keys[2]) == json10_values[2]
+
+
+@pytest.mark.get_value
+def test_get_value_tc5():
+    # Testing get_value with list of JSON
+    json = json_data.json11
+    assert json_parser.get_value(json, json11_keys[0]) == json11_values[0]
+    assert json_parser.get_value(json, json11_keys[1]) == json11_values[1]
+    assert json_parser.get_value(json, json11_keys[2]) == json11_values[2]
+    assert json_parser.get_value(json, json11_keys[3]) == json11_values[3]
 
 
 @pytest.mark.count_keys
