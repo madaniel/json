@@ -54,7 +54,7 @@ def count_keys_dict(json_dict, target_key, count=0):
         :param count: number of target key instances
         :return: number of instances found
     """
-    assert isinstance(json_dict, dict), "can't handle lists as JSON root"
+    assert isinstance(json_dict, dict), "can handle only dict as JSON root"
 
     for key, value in json_dict.iteritems():
         # Handling dictionary
@@ -76,6 +76,18 @@ def count_keys_dict(json_dict, target_key, count=0):
 
 
 def get_value(json_dict, target_key):
+    # Helper function to get_value_dict()
+    if isinstance(json_dict, dict):
+        return get_value_dict(json_dict, target_key)
+
+    if isinstance(json_dict, list):
+        for item in json_dict:
+            value = get_value_dict(item, target_key)
+            if value:
+                return value
+
+
+def get_value_dict(json_dict, target_key):
     """
     :param json_dict: JSON object
     :param target_key: key to find
@@ -83,6 +95,7 @@ def get_value(json_dict, target_key):
     In case of multiple instances, the 1st key value found will be returned
     """
 
+    assert isinstance(json_dict, dict), "can handle only dict as JSON root"
     # The key found on the current dict
     if target_key in json_dict:
         return json_dict[target_key]
