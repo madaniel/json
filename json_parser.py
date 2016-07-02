@@ -4,27 +4,47 @@ import os
 
 
 # # # Functions # # #
-def get_values_list(json_dict, target_key, values_list=None):
+def get_all_values(json_dict, target_key):
+    # Helper function for get_all_values_dict()
+
+    if isinstance(json_dict, dict):
+        return get_all_values_dict(json_dict, target_key)
+
+    values_list = []
+
+    if isinstance(json_dict, list):
+        for item in json_dict:
+            result = get_all_values_dict(item, target_key)
+            if result:
+                values_list.extend(result)
+
+    return values_list
+
+
+def get_all_values_dict(json_dict, target_key, values_list=None):
     """
     :param json_dict: JSON object
     :param target_key: key to find
-    :param values_list: list to be returned
-    :return: list of all the keys found
+    :param values_list: list to be values of target key
+    :return: list of all the values found
     """
     if values_list is None:
         values_list = []
+
+    assert isinstance(json_dict, dict), "Can handle only dict as JSON root"
+
     # Getting deep into the JSON tree first using recursion
     for key, value in json_dict.iteritems():
         # Handling dictionary
         if isinstance(value, dict):
-            get_values_list(value, target_key, values_list)
+            get_all_values_dict(value, target_key, values_list)
         # Handling list
         if isinstance(value, list):
             # Check if list contains dict
             for item in value:
                 # If so, send it to get_value for searching
                 if isinstance(item, dict):
-                    get_values_list(item, target_key, values_list)
+                    get_all_values_dict(item, target_key, values_list)
     # Search for the target key
     if target_key in json_dict:
         values_list.append(json_dict)
