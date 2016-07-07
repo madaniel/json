@@ -95,16 +95,27 @@ def count_keys_dict(json_dict, target_key, count=0):
     return count
 
 
-def get_value(json_dict, target_key):
+def get_value(json_dict, target_key, get_all=False):
+    """
+    :param json_dict: JSON object
+    :param target_key: key to find
+    :param get_all: Search on all JSONs on list
+    :return: value or list of values found on JSON
+    """
     # Helper function to get_value_dict()
     if isinstance(json_dict, dict):
         return get_value_dict(json_dict, target_key)
 
     if isinstance(json_dict, list):
+        found = []
         for item in json_dict:
             value = get_value_dict(item, target_key)
             if value:
-                return value
+                if not get_all:
+                    return value
+                else:
+                    found.append(value)
+        return found
 
 
 def get_value_dict(json_dict, target_key):
